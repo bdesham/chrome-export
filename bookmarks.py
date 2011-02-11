@@ -25,16 +25,27 @@ j = json.loads(file_contents)
 
 out = open(out_file, 'w')
 
-out.write("<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /><title>Chrome Bookmarks</title></head><body><dl>")
+out.write("""<html>
 
-out.write("<dt>Bookmark Bar</dt><dd><dl>")
-get_child_urls(j['roots']['bookmark_bar'])
-out.write("</dl></dd>")
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<title>Chrome Bookmarks</title>
+</head>
 
-out.write("<dt>Other</dt><dd><dl>")
-get_child_urls(j['roots']['other'])
-out.write("</dl></dd>")
+<body>
 
-out.write("</dl></body></html>")
+<dl>
+
+<dt>Bookmark Bar</dt><dd><dl>
+%(bookmark_bar)s
+</dl></dd>
+
+<dt>Other</dt><dd><dl>
+%(other)s
+</dl></dd>
+
+</dl></body></html>"""
+	% {'bookmark_bar': get_child_urls(j['roots']['bookmark_bar']),
+		'other': get_child_urls(j['roots']['other'])})
 
 out.close()

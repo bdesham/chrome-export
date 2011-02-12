@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import json, sys, xml.sax.saxutils, os
+import json, sys, os, re
 
 # html escaping code from http://wiki.python.org/moin/EscapingHtml
 
@@ -14,10 +14,7 @@ html_escape_table = {
 
 def html_escape(text):
     """Produce entities within text."""
-    return "".join(html_escape_table.get(c,c) for c in text)
-
-#def escape_text(string):
-#	return xml.sax.saxutils.escape(string.encode('utf-8'))
+    return ''.join(html_escape_table.get(c,c) for c in text)
 
 def sanitize(string):
 	res = ''
@@ -28,6 +25,7 @@ def sanitize(string):
 			res += '&#x%x;' % ord(string[i])
 		else:
 			res += string[i]
+
 	return res
 
 def html_for_node(node):
@@ -36,23 +34,17 @@ def html_for_node(node):
 	elif 'children' in node:
 		return html_for_parent_node(node)
 	else:
-		return ""
+		return ''
 
 def html_for_url_node(node):
-	return '<dt><a href="%s">%s</a></dt>\n' % (sanitize(node['url']), sanitize(node['name']))
+	if not re.match("javascript:", node['url']):
+		return '<dt><a href="%s">%s</a>\n' % (sanitize(node['url']), sanitize(node['name']))
+	else:
+		return ''
 
 def html_for_parent_node(node):
-	return '<dt><h3>%s</h3></dt>\n<dl><p>%s</p></dl>\n' % (sanitize(node['name']),
+	return '<dt><h3>%s</h3>\n<dl><p>%s</dl><p>\n' % (sanitize(node['name']),
 			''.join([html_for_node(n) for n in node['children']]))
-
-#def get_child_urls(node):
-#	for c in node['children']:
-#		if 'url' in c and not c['url'].startswith('javascript:'):
-#			out.write('<dd><a href="%s">%s</a></dd>' % (escape_text(c['url']), escape_text(c['name'])))
-#		if 'children' in c:
-#			out.write("<dt>%s</dt><dd><dl>" % escape_text(c['name']))
-#			get_child_urls(c)
-#			out.write("</dl></dd>")
 
 in_file = os.path.expanduser(sys.argv[1])
 out_file = os.path.expanduser(sys.argv[2])
@@ -71,9 +63,11 @@ out.write("""<!DOCTYPE NETSCAPE-Bookmark-file-1>
 <title>Bookmarks</title>
 <h1>Bookmarks</h1>
 
-%(bookmark_bar)s
+<dl><p>
 
-%(other)s
+<dl>%(bookmark_bar)s</dl>
+
+<dl>%(other)s</dl>
 """
 	% {'bookmark_bar': html_for_node(j['roots']['bookmark_bar']),
 		'other': html_for_node(j['roots']['other'])})

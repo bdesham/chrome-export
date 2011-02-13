@@ -50,10 +50,8 @@ in_file = os.path.expanduser(sys.argv[1])
 out_file = os.path.expanduser(sys.argv[2])
 
 f = open(in_file, 'r')
-file_contents = f.read()
+j = json.loads(f.read())
 f.close()
-
-j = json.loads(file_contents)
 
 out = open(out_file, 'w')
 

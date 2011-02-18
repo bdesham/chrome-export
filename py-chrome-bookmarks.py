@@ -15,13 +15,12 @@ import json, sys, os, re
 html_escape_table = {
 	"&": "&amp;",
 	'"': "&quot;",
-	"'": "&apos;",
+	"'": "&#39;",
 	">": "&gt;",
 	"<": "&lt;",
 	}
 
 def html_escape(text):
-	"""Produce entities within text."""
 	return ''.join(html_escape_table.get(c,c) for c in text)
 
 def sanitize(string):

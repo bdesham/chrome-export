@@ -10,6 +10,8 @@ From the command line, do
 
     python py-chrome-bookmarks.py .../path/to/Chrome/Bookmarks output.html
 
+The script will ignore URLs that start with “javascript:”.
+
 ## Feature wishlist
 
 I’ll implement these when I get around to them…

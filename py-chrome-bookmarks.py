@@ -1,5 +1,13 @@
 #!/usr/bin/python
 
+# py-chrome-bookmarks
+# 
+# A script to convert Google Chrome's bookmarks file to the standard HTML-ish
+# format.
+#
+# (c) Benjamin Esham, 2011.  See the accompanying README for this file's
+# license and other information.
+
 import json, sys, os, re
 
 # html escaping code from http://wiki.python.org/moin/EscapingHtml

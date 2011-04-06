@@ -10,6 +10,8 @@
 
 import sys, os, sqlite3
 
+script_version = "1.1"
+
 # html escaping code from http://wiki.python.org/moin/EscapingHtml
 
 html_escape_table = {
@@ -39,7 +41,7 @@ def version_text():
 	old_out = sys.stdout
 	sys.stdout = sys.stderr
 
-	print "py-chrome-history"
+	print "py-chrome-history", script_version
 	print "(c) 2011, Benjamin Esham"
 	print "https://github.com/bdesham/py-chrome-bookmarks"
 
@@ -60,12 +62,12 @@ def help_text():
 
 # check for help or version requests
 
-if len(sys.argv) != 3 or "-h" in sys.argv or "--help" in sys.argv:
-	help_text()
-	exit()
-
 if "-v" in sys.argv or "--version" in sys.argv:
 	version_text()
+	exit()
+
+if len(sys.argv) != 3 or "-h" in sys.argv or "--help" in sys.argv:
+	help_text()
 	exit()
 
 # the actual code here...

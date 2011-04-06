@@ -53,14 +53,60 @@ def html_for_parent_node(node):
 	return '<dt><h3>%s</h3>\n<dl><p>%s</dl><p>\n' % (sanitize(node['name']),
 			''.join([html_for_node(n) for n in node['children']]))
 
+def version_text():
+	old_out = sys.stdout
+	sys.stdout = sys.stderr
+
+	print "py-chrome-bookmarks"
+	print "(c) 2011, Benjamin Esham"
+	print "https://github.com/bdesham/py-chrome-bookmarks"
+
+	sys.stdout = old_out
+
+def help_text():
+	version_text()
+
+	old_out = sys.stdout
+	sys.stdout = sys.stderr
+
+	print
+	print "usage: python py-chrome-bookmarks input-file output-file"
+	print "  input-file is the Chrome bookmarks file"
+	print "  output-file is the destination for the generated HTML bookmarks file"
+
+	sys.stdout = old_out
+
+# check for help or version requests
+
+if len(sys.argv) != 3 or "-h" in sys.argv or "--help" in sys.argv:
+	help_text()
+	exit()
+
+if "-v" in sys.argv or "--version" in sys.argv:
+	version_text()
+	exit()
+
+# the actual code here...
+
 in_file = os.path.expanduser(sys.argv[1])
 out_file = os.path.expanduser(sys.argv[2])
 
-f = open(in_file, 'r')
+try:
+	f = open(in_file, 'r')
+except IOError, e:
+	print >> sys.stderr, "py-chrome-bookmarks: error opening the input file."
+	print >> sys.stderr, e
+	exit()
+
 j = json.loads(f.read())
 f.close()
 
-out = open(out_file, 'w')
+try:
+	out = open(out_file, 'w')
+except IOError, e:
+	print >> sys.stderr, "py-chrome-bookmarks: error opening the output file."
+	print >> sys.stderr, e
+	exit()
 
 out.write("""<!DOCTYPE NETSCAPE-Bookmark-file-1>
 

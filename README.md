@@ -1,6 +1,6 @@
 # py-chrome-bookmarks
 
-Simple Python scripts to convert [Google Chrome](http://www.google.com/chrome)’s bookmarks and history to the [standard HTML-ish bookmarks file format](http://msdn.microsoft.com/en-us/library/aa753582%28v=vs.85%29.aspx).  Scripts written by Benjamin Esham <bdesham@gmail.com>.
+Simple Python scripts to convert [Google Chrome](http://www.google.com/chrome)’s bookmarks and history to the [standard HTML-ish bookmarks file format](http://msdn.microsoft.com/en-us/library/aa753582%28v=vs.85%29.aspx).  Scripts written by Benjamin Esham (e-mail: bdesham at gmail).
 
 The functionality to do this for bookmarks is already built into Chrome (select Bookmarks → Bookmarks Manager, then click “Organize” and select “Export Bookmarks…”).  I wrote this script to be able to perform this conversion in a cron script.
 
@@ -23,6 +23,16 @@ From the command line, do
 **Note:** it’s probably necessary to quit Chrome before running this so that the history database isn’t locked.  Alternately, make a copy of Chrome’s History file and run the script on that.
 
 The script will ignore history entries with empty titles.
+
+## Version history
+
+* 1.1
+
+    Added help and version text (and started counting versions).  Added some checking for errors while opening the input or output files.
+
+* 1.0
+
+    Initial release
 
 ## Feature wishlist
 

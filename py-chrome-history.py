@@ -5,8 +5,8 @@
 # A script to convert Google Chrome's history file to the standard HTML-ish
 # bookmarks file format.
 #
-# Copyright (c) 2011 Benjamin D. Esham. This program is released under the ISC
-# license, which you can find in the file LICENSE.md.
+# Copyright (c) 2011, 2017 Benjamin D. Esham. This program is released under the
+# ISC license, which you can find in the file LICENSE.md.
 
 from __future__ import print_function
 from os.path import expanduser
@@ -42,7 +42,7 @@ def sanitize(string):
 
 def version_text():
 	print("py-chrome-history {}".format(script_version), file=stderr)
-	print("(c) 2011, Benjamin Esham", file=stderr)
+	print("(c) 2011, 2017 Benjamin D. Esham", file=stderr)
 	print("https://github.com/bdesham/py-chrome-bookmarks", file=stderr)
 
 def help_text():

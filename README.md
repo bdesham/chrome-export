@@ -1,10 +1,15 @@
 # py-chrome-bookmarks [![Build Status](https://travis-ci.org/bdesham/py-chrome-bookmarks.svg?branch=master)](https://travis-ci.org/bdesham/py-chrome-bookmarks)
 
-Simple Python scripts to convert [Google Chrome](http://www.google.com/chrome)’s bookmarks and history to the [standard HTML-ish bookmarks file format](http://msdn.microsoft.com/en-us/library/aa753582%28v=vs.85%29.aspx).
+Scripts to convert [Google Chrome]’s bookmarks and history to the [standard HTML-ish bookmarks file format][format].
 
-The functionality to do this for bookmarks is already built into Chrome (select Bookmarks → Bookmarks Manager, then click “Organize” and select “Export Bookmarks…”). I wrote this script to be able to perform this conversion in a cron script.
+[Google Chrome]: http://www.google.com/chrome/
+[format]: https://msdn.microsoft.com/en-us/library/aa753582(v=vs.85).aspx
+
+The functionality to do this for bookmarks is already built into Chrome (select Bookmarks&nbsp;→ Bookmarks Manager, then click “Organize” and select “Export Bookmarks…”). I wrote this script to be able to perform this conversion in a cron script.
 
 ## Usage
+
+These scripts require Python. They have been tested under the following Python versions: 2.6, 2.7, 3.2, 3.3, 3.4, 3.5, and 3.6. They should work on Linux, macOS, and Windows.
 
 ### Bookmarks script
 
@@ -24,20 +29,24 @@ From the command line, do
 
 The script will ignore history entries with empty titles.
 
-## Version history
-
-* 1.1
-    - Added help and version text (and started counting versions). Added some checking for errors while opening the input or output files.
-* 1.0
-    - Initial release
-
 ## Feature wishlist
 
 I’ll implement these when I get around to them…
 
-* Identify the earliest version of Python that will run this script and add that to the README
 * Make a educated guess for the input filename based on the OS
 * Print to stdout if no output filename is given
+
+## Notes for developers
+
+To test changes to the scripts, run the shell script `test/run_tests`. The script runs the bookmarks and history scripts and verifies that their output is identical to what is expected.
+
+## Version history
+
+* 1.1 (2011-04-06)
+    - Added help and version text (and started counting versions).
+    - Added some checking for errors while opening the input or output files.
+* 1.0
+    - Initial release
 
 ## Author
 
@@ -47,4 +56,4 @@ This project is [hosted on GitHub](https://github.com/bdesham/py-chrome-bookmark
 
 ## License
 
-Copyright © 2011 Benjamin D. Esham. This program is released under the ISC license, which you can find in the file LICENSE.md.
+Copyright © 2011, 2017 Benjamin D. Esham. This program is released under the ISC license, which you can find in the file LICENSE.md.

@@ -8,7 +8,8 @@
 # Copyright (c) 2011 Benjamin D. Esham. This program is released under the ISC
 # license, which you can find in the file LICENSE.md.
 
-from sys import argv, stderr, stdout
+from __future__ import print_function
+from sys import argv, stderr
 import json, os, re
 
 script_version = "1.1"
@@ -57,27 +58,17 @@ def html_for_parent_node(node):
 			''.join([html_for_node(n) for n in node['children']]))
 
 def version_text():
-	old_out = stdout
-	stdout = stderr
-
-	print "py-chrome-bookmarks", script_version
-	print "(c) 2011, Benjamin Esham"
-	print "https://github.com/bdesham/py-chrome-bookmarks"
-
-	stdout = old_out
+	print("py-chrome-bookmarks {}".format(script_version), file=stderr)
+	print("(c) 2011, Benjamin Esham", file=stderr)
+	print("https://github.com/bdesham/py-chrome-bookmarks", file=stderr)
 
 def help_text():
 	version_text()
 
-	old_out = stdout
-	stdout = stderr
-
 	print
-	print "usage: python py-chrome-bookmarks input-file output-file"
-	print "  input-file is the Chrome bookmarks file"
-	print "  output-file is the destination for the generated HTML bookmarks file"
-
-	stdout = old_out
+	print("usage: python py-chrome-bookmarks input-file output-file", file=stderr)
+	print("  input-file is the Chrome bookmarks file", file=stderr)
+	print("  output-file is the destination for the generated HTML bookmarks file", file=stderr)
 
 # check for help or version requests
 
@@ -96,9 +87,9 @@ out_file = os.path.expanduser(argv[2])
 
 try:
 	f = open(in_file, 'r')
-except IOError, e:
-	print >> stderr, "py-chrome-bookmarks: error opening the input file."
-	print >> stderr, e
+except IOError as e:
+	print("py-chrome-bookmarks: error opening the input file.", file=stderr)
+	print(e, file=stderr)
 	exit()
 
 j = json.loads(f.read())
@@ -106,9 +97,9 @@ f.close()
 
 try:
 	out = open(out_file, 'w')
-except IOError, e:
-	print >> stderr, "py-chrome-bookmarks: error opening the output file."
-	print >> stderr, e
+except IOError as e:
+	print("py-chrome-bookmarks: error opening the output file.", file=stderr)
+	print(e, file=stderr)
 	exit()
 
 out.write("""<!DOCTYPE NETSCAPE-Bookmark-file-1>

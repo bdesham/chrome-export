@@ -67,7 +67,7 @@ def version_text():
 def help_text():
 	version_text()
 
-	print
+	print("")
 	print("usage: python py-chrome-bookmarks input-file output-file", file=stderr)
 	print("  input-file is the Chrome bookmarks file", file=stderr)
 	print("  output-file is the destination for the generated HTML bookmarks file", file=stderr)

@@ -8,9 +8,10 @@
 # Copyright (c) 2011 Benjamin D. Esham. This program is released under the ISC
 # license, which you can find in the file LICENSE.md.
 
+from __future__ import print_function
 from os.path import expanduser
 import sqlite3
-from sys import argv, stderr, stdout
+from sys import argv, stderr
 
 script_version = "1.1"
 
@@ -40,27 +41,17 @@ def sanitize(string):
 	return res
 
 def version_text():
-	old_out = stdout
-	stdout = stderr
-
-	print "py-chrome-history", script_version
-	print "(c) 2011, Benjamin Esham"
-	print "https://github.com/bdesham/py-chrome-bookmarks"
-
-	stdout = old_out
+	print("py-chrome-history {}".format(script_version), file=stderr)
+	print("(c) 2011, Benjamin Esham", file=stderr)
+	print("https://github.com/bdesham/py-chrome-bookmarks", file=stderr)
 
 def help_text():
 	version_text()
 
-	old_out = stdout
-	stdout = stderr
-
-	print
-	print "usage: python py-chrome-history input-file output-file"
-	print "  input-file is the Chrome history file"
-	print "  output-file is the destination for the generated HTML bookmarks file"
-
-	stdout = old_out
+	print("")
+	print("usage: python py-chrome-history input-file output-file", file=stderr)
+	print("  input-file is the Chrome history file", file=stderr)
+	print("  output-file is the destination for the generated HTML bookmarks file", file=stderr)
 
 # check for help or version requests
 
@@ -82,9 +73,9 @@ curs = connection.cursor()
 
 try:
 	out = open(out_file, 'w')
-except IOError, e:
-	print >> stderr, "py-chrome-history: error opening the output file."
-	print >> stderr, e
+except IOError as e:
+	print("py-chrome-history: error opening the output file.", file=stderr)
+	print(e, file=stderr)
 	exit()
 
 out.write("""<!DOCTYPE NETSCAPE-Bookmark-file-1>

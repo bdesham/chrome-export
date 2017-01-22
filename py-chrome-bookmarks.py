@@ -9,8 +9,10 @@
 # license, which you can find in the file LICENSE.md.
 
 from __future__ import print_function
+from json import loads
+from os.path import expanduser
+from re import match
 from sys import argv, stderr
-import json, os, re
 
 script_version = "1.1"
 
@@ -48,7 +50,7 @@ def html_for_node(node):
 		return ''
 
 def html_for_url_node(node):
-	if not re.match("javascript:", node['url']):
+	if not match("javascript:", node['url']):
 		return '<dt><a href="%s">%s</a>\n' % (sanitize(node['url']), sanitize(node['name']))
 	else:
 		return ''
@@ -82,8 +84,8 @@ if len(argv) != 3 or "-h" in argv or "--help" in argv:
 
 # the actual code here...
 
-in_file = os.path.expanduser(argv[1])
-out_file = os.path.expanduser(argv[2])
+in_file = expanduser(argv[1])
+out_file = expanduser(argv[2])
 
 try:
 	f = open(in_file, 'r')
@@ -92,7 +94,7 @@ except IOError as e:
 	print(e, file=stderr)
 	exit()
 
-j = json.loads(f.read())
+j = loads(f.read())
 f.close()
 
 try:

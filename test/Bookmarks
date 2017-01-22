@@ -1,0 +1,60 @@
+{
+   "checksum": "5088834b6b82c4952da3e0a93e4cf151",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13129578793533581",
+            "id": "9",
+            "name": "Google",
+            "type": "url",
+            "url": "https://www.google.com/"
+         }, {
+            "date_added": "13129578805136275",
+            "id": "10",
+            "name": "Washington Post",
+            "type": "url",
+            "url": "https://www.washingtonpost.com/"
+         } ],
+         "date_added": "13129345492533809",
+         "date_modified": "13129578842701587",
+         "id": "1",
+         "name": "Bookmarks Bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [ {
+            "date_added": "13129578818718337",
+            "id": "11",
+            "name": "GitHub",
+            "type": "url",
+            "url": "https://github.com/"
+         }, {
+            "date_added": "13129345498905796",
+            "id": "6",
+            "name": "HBO NOW",
+            "type": "url",
+            "url": "https://www.hbonow.com/"
+         }, {
+            "date_added": "13129578826613783",
+            "id": "12",
+            "name": "Vim",
+            "type": "url",
+            "url": "http://www.vim.org/"
+         } ],
+         "date_added": "13129345492533817",
+         "date_modified": "13129578850502533",
+         "id": "2",
+         "name": "Other Bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13129345492533820",
+         "date_modified": "0",
+         "id": "3",
+         "name": "Mobile Bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

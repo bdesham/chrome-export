@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd "$(cd "$(dirname "$0")"; pwd -P)/.."
+
+python py-chrome-bookmarks.py test/Bookmarks test/bookmarks_actual_output.html
+exec diff test/bookmarks_expected_output.html test/bookmarks_actual_output.html

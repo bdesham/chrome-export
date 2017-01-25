@@ -1,5 +1,5 @@
 {
-   "checksum": "5088834b6b82c4952da3e0a93e4cf151",
+   "checksum": "ad0ce68d821c76e5336c223ab5bb634f",
    "roots": {
       "bookmark_bar": {
          "children": [ {
@@ -40,9 +40,15 @@
             "name": "Vim",
             "type": "url",
             "url": "http://www.vim.org/"
+         }, {
+            "date_added": "13129777099514435",
+            "id": "15",
+            "name": "维基百科，自由的百科全书",
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5"
          } ],
          "date_added": "13129345492533817",
-         "date_modified": "13129578850502533",
+         "date_modified": "13129777099514435",
          "id": "2",
          "name": "Other Bookmarks",
          "type": "folder"

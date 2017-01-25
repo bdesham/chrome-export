@@ -34,7 +34,7 @@ def sanitize(string):
 
 	for i in range(len(string)):
 		if ord(string[i]) > 127:
-			res += '&#x%x;' % ord(string[i])
+			res += '&#x{:x};'.format(ord(string[i]))
 		else:
 			res += string[i]
 
@@ -94,7 +94,7 @@ curs.execute("SELECT url, title FROM urls")
 
 for row in curs:
 	if len(row[1]) > 0:
-		out.write('<dt><a href="%s">%s</a>\n' % (sanitize(row[0]), sanitize(row[1])))
+		out.write('<dt><a href="{}">{}</a>\n'.format(sanitize(row[0]), sanitize(row[1])))
 
 connection.close()
 

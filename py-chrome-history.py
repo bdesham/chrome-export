@@ -10,6 +10,9 @@
 
 from __future__ import print_function
 import argparse
+from os import environ
+from os.path import expanduser
+from platform import system
 import sqlite3
 from sys import argv, stderr
 
@@ -67,12 +70,37 @@ parser.add_argument("-v", "--version", action="version",
 
 args = parser.parse_args()
 
+# Determine where the input file is
+
+if args.input_file:
+	input_filename = args.input_file
+else:
+	if system() == "Darwin":
+		input_filename = expanduser("~/Library/Application Support/Google/Chrome/Default/History")
+	elif system() == "Linux":
+		input_filename = expanduser("~/.config/google-chrome/Default/History")
+	elif system() == "Windows":
+		input_filename = environ["LOCALAPPDATA"] + r"\Google\Chrome\User Data\Default\History"
+	else:
+		print('Your system ("{}") is not recognized. Please specify the input file manually.'.format(system()))
+		exit(1)
+
+	try:
+		input_file = open(input_filename, 'r')
+	except IOError as e:
+		if e.errno == 2:
+			print("The history file could not be found in its default location ({}). ".format(e.filename) +
+					"Please specify the input file manually.")
+			exit(1)
+	else:
+		input_file.close()
+
 # Open the database, process its contents, and write the output file
 
 try:
-	connection = sqlite3.connect(args.input_file)
+	connection = sqlite3.connect(input_filename)
 except sqlite3.OperationalError:
-	print('The file "{}" could not be opened for reading.'.format(args.input_file))
+	print('The file "{}" could not be opened for reading.'.format(input_filename))
 	exit(1)
 
 curs = connection.cursor()

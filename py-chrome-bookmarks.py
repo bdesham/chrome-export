@@ -11,6 +11,9 @@
 from __future__ import print_function
 import argparse
 from json import loads
+from os import environ
+from os.path import expanduser
+from platform import system
 from re import match
 from sys import argv, stderr
 
@@ -87,10 +90,33 @@ parser.add_argument("-v", "--version", action="version",
 
 args = parser.parse_args()
 
+# Determine where the input file is
+
+if args.input_file:
+	input_file = args.input_file
+else:
+	if system() == "Darwin":
+		input_filename = expanduser("~/Library/Application Support/Google/Chrome/Default/Bookmarks")
+	elif system() == "Linux":
+		input_filename = expanduser("~/.config/google-chrome/Default/Bookmarks")
+	elif system() == "Windows":
+		input_filename = environ["LOCALAPPDATA"] + r"\Google\Chrome\User Data\Default\Bookmarks"
+	else:
+		print('Your system ("{}") is not recognized. Please specify the input file manually.'.format(system()))
+		exit(1)
+
+	try:
+		input_file = open(input_filename, 'r')
+	except IOError as e:
+		if e.errno == 2:
+			print("The bookmarks file could not be found in its default location ({}). ".format(e.filename) +
+					"Please specify the input file manually.")
+			exit(1)
+
 # Read, convert, and write the bookmarks
 
-contents = loads(args.input_file.read())
-args.input_file.close()
+contents = loads(input_file.read())
+input_file.close()
 
 bookmark_bar = html_for_node(contents['roots']['bookmark_bar'])
 other = html_for_node(contents['roots']['other'])

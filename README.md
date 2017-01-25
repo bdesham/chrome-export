@@ -13,28 +13,25 @@ These scripts require Python, either version 2.7.x or else version 3.2 or later.
 
 ### Bookmarks script
 
-From the command line, do
+The usage is
 
-    python py-chrome-bookmarks.py .../path/to/Chrome/Bookmarks output.html
+    python py-chrome-bookmarks.py [input_file] output_file
+
+If you do not specify an input file, the script will try to open the default Chrome bookmarks file.
 
 The script will ignore URLs that start with “javascript:”.
 
 ### History script
 
-From the command line, do
+The usage is
 
-    python py-chrome-history.py .../path/to/Chrome/History output.html
+    python py-chrome-history.py [input_file] output_file
+
+If you do not specify an input file, the script will try to open the default Chrome history file.
 
 **Note:** it’s probably necessary to quit Chrome before running this so that the history database isn’t locked. Alternately, make a copy of Chrome’s History file and run the script on that.
 
 The script will ignore history entries with empty titles.
-
-## Feature wishlist
-
-I’ll implement these when I get around to them…
-
-* Make a educated guess for the input filename based on the OS
-* Print to stdout if no output filename is given
 
 ## Notes for developers
 

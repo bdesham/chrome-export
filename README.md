@@ -9,7 +9,7 @@ The functionality to do this for bookmarks is already built into Chrome (select 
 
 ## Usage
 
-These scripts require Python. They have been tested under the following Python versions: 2.6, 2.7, 3.2, 3.3, 3.4, 3.5, and 3.6. They should work on Linux, macOS, and Windows.
+These scripts require Python, either version 2.7.x or else version 3.2 or later. They should work on Linux, macOS, and Windows.
 
 ### Bookmarks script
 

@@ -9,7 +9,7 @@
 # ISC license, which you can find in the file LICENSE.md.
 
 from __future__ import print_function
-from os.path import expanduser
+import argparse
 import sqlite3
 from sys import argv, stderr
 
@@ -24,6 +24,18 @@ html_escape_table = {
 	">": "&gt;",
 	"<": "&lt;",
 	}
+
+output_file_template = """<!DOCTYPE NETSCAPE-Bookmark-file-1>
+
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<title>Bookmarks</title>
+<h1>Bookmarks</h1>
+
+<dl><p>
+
+<dl><dt><h3>History</h3>
+
+<dl><p>{items}</dl></p>\n</dl>"""
 
 def html_escape(text):
 	return ''.join(html_escape_table.get(c,c) for c in text)
@@ -40,64 +52,43 @@ def sanitize(string):
 
 	return res
 
-def version_text():
-	print("py-chrome-history {}".format(script_version), file=stderr)
-	print("(c) 2011, 2017 Benjamin D. Esham", file=stderr)
-	print("https://github.com/bdesham/py-chrome-bookmarks", file=stderr)
 
-def help_text():
-	version_text()
+# Parse the command-line arguments
 
-	print("")
-	print("usage: python py-chrome-history input-file output-file", file=stderr)
-	print("  input-file is the Chrome history file", file=stderr)
-	print("  output-file is the destination for the generated HTML bookmarks file", file=stderr)
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
+		description="Convert Google Chrome's history file to the standard HTML-based format.",
+		epilog="(c) 2011, 2017 Benjamin D. Esham\nhttps://github.com/bdesham/py-chrome-bookmarks")
+parser.add_argument("input_file", nargs="?",
+		help="The location of the Chrome history file to read. If this is omitted then the script will look for the file in Chrome's default location.")
+parser.add_argument("output_file", type=argparse.FileType('w'),
+		help="The location where the HTML bookmarks file will be written.")
+parser.add_argument("-v", "--version", action="version",
+		version="py-chrome-history {}".format(script_version))
 
-# check for help or version requests
+args = parser.parse_args()
 
-if "-v" in argv or "--version" in argv:
-	version_text()
-	exit()
+# Open the database, process its contents, and write the output file
 
-if len(argv) != 3 or "-h" in argv or "--help" in argv:
-	help_text()
-	exit()
+try:
+	connection = sqlite3.connect(args.input_file)
+except sqlite3.OperationalError:
+	print('The file "{}" could not be opened for reading.'.format(args.input_file))
+	exit(1)
 
-# the actual code here...
-
-in_file = expanduser(argv[1])
-out_file = expanduser(argv[2])
-
-connection = sqlite3.connect(in_file)
 curs = connection.cursor()
 
 try:
-	out = open(out_file, 'w')
-except IOError as e:
-	print("py-chrome-history: error opening the output file.", file=stderr)
-	print(e, file=stderr)
-	exit()
+	curs.execute("SELECT url, title FROM urls")
+except sqlite3.OperationalError:
+	print('There was an error reading data from the file "{}".'.format(args.input_file))
+	exit(1)
 
-out.write("""<!DOCTYPE NETSCAPE-Bookmark-file-1>
-
-<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<title>Bookmarks</title>
-<h1>Bookmarks</h1>
-
-<dl><p>
-
-<dl><dt><h3>History</h3>
-
-<dl><p>""")
-
-curs.execute("SELECT url, title FROM urls")
-
+items = ""
 for row in curs:
 	if len(row[1]) > 0:
-		out.write('<dt><a href="{}">{}</a>\n'.format(sanitize(row[0]), sanitize(row[1])))
+		items += '<dt><a href="{}">{}</a>\n'.format(sanitize(row[0]), sanitize(row[1]))
 
 connection.close()
 
-out.write("</dl></p>\n</dl>")
-
-out.close()
+args.output_file.write(output_file_template.format(items=items))
+args.output_file.close()

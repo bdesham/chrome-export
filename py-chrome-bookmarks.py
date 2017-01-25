@@ -9,8 +9,8 @@
 # ISC license, which you can find in the file LICENSE.md.
 
 from __future__ import print_function
+import argparse
 from json import loads
-from os.path import expanduser
 from re import match
 from sys import argv, stderr
 
@@ -25,6 +25,19 @@ html_escape_table = {
 	">": "&gt;",
 	"<": "&lt;",
 	}
+
+output_file_template = """<!DOCTYPE NETSCAPE-Bookmark-file-1>
+
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<title>Bookmarks</title>
+<h1>Bookmarks</h1>
+
+<dl><p>
+
+<dl>{bookmark_bar}</dl>
+
+<dl>{other}</dl>
+"""
 
 def html_escape(text):
 	return ''.join(html_escape_table.get(c,c) for c in text)
@@ -59,64 +72,28 @@ def html_for_parent_node(node):
 	return '<dt><h3>{}</h3>\n<dl><p>{}</dl><p>\n'.format(sanitize(node['name']),
 			''.join([html_for_node(n) for n in node['children']]))
 
-def version_text():
-	print("py-chrome-bookmarks {}".format(script_version), file=stderr)
-	print("(c) 2011, 2017 Benjamin D. Esham", file=stderr)
-	print("https://github.com/bdesham/py-chrome-bookmarks", file=stderr)
 
-def help_text():
-	version_text()
+# Parse the command-line arguments
 
-	print("")
-	print("usage: python py-chrome-bookmarks input-file output-file", file=stderr)
-	print("  input-file is the Chrome bookmarks file", file=stderr)
-	print("  output-file is the destination for the generated HTML bookmarks file", file=stderr)
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
+		description="Convert Google Chrome's bookmarks file to the standard HTML-based format.",
+		epilog="(c) 2011, 2017 Benjamin D. Esham\nhttps://github.com/bdesham/py-chrome-bookmarks")
+parser.add_argument("input_file", type=argparse.FileType('r'), nargs="?",
+		help="The location of the Chrome bookmarks file to read. If this is omitted then the script will look for the file in Chrome's default location.")
+parser.add_argument("output_file", type=argparse.FileType('w'),
+		help="The location where the HTML bookmarks file will be written.")
+parser.add_argument("-v", "--version", action="version",
+		version="py-chrome-bookmarks {}".format(script_version))
 
-# check for help or version requests
+args = parser.parse_args()
 
-if "-v" in argv or "--version" in argv:
-	version_text()
-	exit()
+# Read, convert, and write the bookmarks
 
-if len(argv) != 3 or "-h" in argv or "--help" in argv:
-	help_text()
-	exit()
+contents = loads(args.input_file.read())
+args.input_file.close()
 
-# the actual code here...
+bookmark_bar = html_for_node(contents['roots']['bookmark_bar'])
+other = html_for_node(contents['roots']['other'])
 
-in_file = expanduser(argv[1])
-out_file = expanduser(argv[2])
-
-try:
-	f = open(in_file, 'r')
-except IOError as e:
-	print("py-chrome-bookmarks: error opening the input file.", file=stderr)
-	print(e, file=stderr)
-	exit()
-
-j = loads(f.read())
-f.close()
-
-try:
-	out = open(out_file, 'w')
-except IOError as e:
-	print("py-chrome-bookmarks: error opening the output file.", file=stderr)
-	print(e, file=stderr)
-	exit()
-
-out.write("""<!DOCTYPE NETSCAPE-Bookmark-file-1>
-
-<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<title>Bookmarks</title>
-<h1>Bookmarks</h1>
-
-<dl><p>
-
-<dl>{bookmark_bar}</dl>
-
-<dl>{other}</dl>
-"""
-	.format(bookmark_bar=html_for_node(j['roots']['bookmark_bar']),
-		other=html_for_node(j['roots']['other'])))
-
-out.close()
+args.output_file.write(output_file_template.format(bookmark_bar=bookmark_bar, other=other))
+args.output_file.close()

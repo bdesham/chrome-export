@@ -11,10 +11,12 @@
 from __future__ import print_function
 import argparse
 from os import environ
-from os.path import expanduser
+from os.path import expanduser, join
 from platform import system
+from shutil import copy, rmtree
 import sqlite3
 from sys import argv, stderr
+from tempfile import mkdtemp
 
 script_version = "1.1"
 
@@ -95,12 +97,22 @@ else:
 	else:
 		input_file.close()
 
-# Open the database, process its contents, and write the output file
+# Make a copy of the database, open it, process its contents, and write the
+# output file
+
+temp_dir = mkdtemp(prefix='py-chrome-history-')
+copied_file = join(temp_dir, 'History')
+copy(input_filename, copied_file)
 
 try:
-	connection = sqlite3.connect(input_filename)
+	connection = sqlite3.connect(copied_file)
 except sqlite3.OperationalError:
+	# This error message is a *little* misleading, since the problem actually
+	# occurred when we tried to open copied_file, but chances are that if we got
+	# to this point then the problem lies with the file itself (e.g. it isn't a
+	# valid SQLite database), not with our ability to read the file.
 	print('The file "{}" could not be opened for reading.'.format(input_filename))
+	rmtree(temp_dir)
 	exit(1)
 
 curs = connection.cursor()
@@ -109,6 +121,7 @@ try:
 	curs.execute("SELECT url, title FROM urls")
 except sqlite3.OperationalError:
 	print('There was an error reading data from the file "{}".'.format(args.input_file))
+	rmtree(temp_dir)
 	exit(1)
 
 items = ""
@@ -117,6 +130,7 @@ for row in curs:
 		items += '<dt><a href="{}">{}</a>\n'.format(sanitize(row[0]), sanitize(row[1]))
 
 connection.close()
+rmtree(temp_dir)
 
 args.output_file.write(output_file_template.format(items=items))
 args.output_file.close()

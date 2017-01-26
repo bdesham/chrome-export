@@ -29,8 +29,6 @@ The usage is
 
 If you do not specify an input file, the script will try to open the default Chrome history file.
 
-**Note:** it’s probably necessary to quit Chrome before running this so that the history database isn’t locked. Alternately, make a copy of Chrome’s History file and run the script on that.
-
 The script will ignore history entries with empty titles.
 
 ## Notes for developers
@@ -39,6 +37,10 @@ To test changes to the scripts, run the shell script `test/run_tests`. The scrip
 
 ## Version history
 
+* 1.2 (2017-01-26)
+    - Added support for Python 3, dropped support for Python 2.6 and earlier, and made this all clear in the readme.
+    - Giving an input filename is now optional for both scripts. If you omit the input filename then the scripts will try to open Chrome’s bookmarks or history file automatically.
+    - The history script now makes a copy of the input file before opening it. Previously, it was necessary either to make a copy yourself or to quit Chrome before running the script. (The history file is a SQLite database and it isn’t possible for two programs to have it open at the same time.)
 * 1.1 (2011-04-06)
     - Added help and version text (and started counting versions).
     - Added some checking for errors while opening the input or output files.
@@ -47,7 +49,7 @@ To test changes to the scripts, run the shell script `test/run_tests`. The scrip
 
 ## Author
 
-This program was created by [Benjamin Esham](https://esham.io).
+These programs were created by [Benjamin Esham](https://esham.io).
 
 This project is [hosted on GitHub](https://github.com/bdesham/py-chrome-bookmarks). Please feel free to submit pull requests.
 

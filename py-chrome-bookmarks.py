@@ -17,7 +17,7 @@ from platform import system
 from re import match
 from sys import argv, stderr
 
-script_version = "1.1"
+script_version = "1.2"
 
 # html escaping code from http://wiki.python.org/moin/EscapingHtml
 

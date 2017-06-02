@@ -37,6 +37,8 @@ To test changes to the scripts, run the shell script `test/run_tests`. The scrip
 
 ## Version history
 
+* 1.2.1 (2017-06-02)
+    - Fixed a Unicode decoding error under Windows 7. (Thanks [Boburmirzo Hamraqulov](https://github.com/bzimor)!)
 * 1.2 (2017-01-26)
     - Added support for Python 3, dropped support for Python 2.6 and earlier, and made this all clear in the readme.
     - Giving an input filename is now optional for both scripts. If you omit the input filename then the scripts will try to open Chrome’s bookmarks or history file automatically.

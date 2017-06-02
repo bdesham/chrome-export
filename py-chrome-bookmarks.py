@@ -106,7 +106,7 @@ else:
 		exit(1)
 
 	try:
-		input_file = open(input_filename, 'r')
+		input_file = open(input_filename, 'r', encoding='utf-8')
 	except IOError as e:
 		if e.errno == 2:
 			print("The bookmarks file could not be found in its default location ({}). ".format(e.filename) +

@@ -62,7 +62,7 @@ def sanitize(string):
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
 		description="Convert Google Chrome's history file to the standard HTML-based format.",
-		epilog="(c) 2011, 2017 Benjamin D. Esham\nhttps://github.com/bdesham/py-chrome-bookmarks")
+		epilog="(c) 2011, 2017 Benjamin D. Esham\nhttps://github.com/bdesham/chrome-export")
 parser.add_argument("input_file", nargs="?",
 		help="The location of the Chrome history file to read. If this is omitted then the script will look for the file in Chrome's default location.")
 parser.add_argument("output_file", type=argparse.FileType('w'),

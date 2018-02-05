@@ -80,7 +80,7 @@ def html_for_parent_node(node):
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
 		description="Convert Google Chrome's bookmarks file to the standard HTML-based format.",
-		epilog="(c) 2011, 2017 Benjamin D. Esham\nhttps://github.com/bdesham/py-chrome-bookmarks")
+		epilog="(c) 2011, 2017 Benjamin D. Esham\nhttps://github.com/bdesham/chrome-export")
 parser.add_argument("input_file", type=argparse.FileType('r'), nargs="?",
 		help="The location of the Chrome bookmarks file to read. If this is omitted then the script will look for the file in Chrome's default location.")
 parser.add_argument("output_file", type=argparse.FileType('w'),

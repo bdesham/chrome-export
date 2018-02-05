@@ -1,6 +1,8 @@
-# py-chrome-bookmarks [![Build Status](https://travis-ci.org/bdesham/py-chrome-bookmarks.svg?branch=master)](https://travis-ci.org/bdesham/py-chrome-bookmarks)
+# chrome-export [![Build Status](https://travis-ci.org/bdesham/chrome-export.svg?branch=master)](https://travis-ci.org/bdesham/chrome-export)
 
-Scripts to convert [Google Chrome]’s bookmarks and history to the [standard HTML-ish bookmarks file format][format].
+*Formerly called py-chrome-bookmarks*
+
+Python scripts to convert [Google Chrome]’s bookmarks and history to the [standard HTML-ish bookmarks file format][format].
 
 [Google Chrome]: http://www.google.com/chrome/
 [format]: https://msdn.microsoft.com/en-us/library/aa753582(v=vs.85).aspx
@@ -53,7 +55,7 @@ To test changes to the scripts, run the shell script `test/run_tests`. The scrip
 
 These programs were created by [Benjamin Esham](https://esham.io).
 
-This project is [hosted on GitHub](https://github.com/bdesham/py-chrome-bookmarks). Please feel free to submit pull requests.
+This project is [hosted on GitHub](https://github.com/bdesham/chrome-export). Please feel free to submit pull requests.
 
 ## License
 

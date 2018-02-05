@@ -18,7 +18,7 @@ import sqlite3
 from sys import argv, stderr
 from tempfile import mkdtemp
 
-script_version = "1.2.1"
+script_version = "2.0"
 
 # html escaping code from http://wiki.python.org/moin/EscapingHtml
 

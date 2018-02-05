@@ -39,6 +39,8 @@ To test changes to the scripts, run the shell script `test/run_tests`. The scrip
 
 ## Version history
 
+* 2.0 (2018-02-05)
+    - Renamed the project from “py-chrome-bookmarks” to “chrome-export”; renamed “py-chrome-bookmarks.py” to “export-chrome-bookmarks”; and renamed “py-chrome-history.py” to “export-chrome-history”. There were no changes in functionality.
 * 1.2.1 (2017-06-02)
     - Fixed a Unicode decoding error under Windows 7. (Thanks [Boburmirzo Hamraqulov](https://github.com/bzimor)!)
 * 1.2 (2017-01-26)

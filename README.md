@@ -15,7 +15,7 @@ These scripts require Python, either version 2.7.x or else version 3.2 or later.
 
 The usage is
 
-    python py-chrome-bookmarks.py [input_file] output_file
+    export-chrome-bookmarks [input_file] output_file
 
 If you do not specify an input file, the script will try to open the default Chrome bookmarks file.
 
@@ -25,7 +25,7 @@ The script will ignore URLs that start with “javascript:”.
 
 The usage is
 
-    python py-chrome-history.py [input_file] output_file
+    export-chrome-history [input_file] output_file
 
 If you do not specify an input file, the script will try to open the default Chrome history file.
 

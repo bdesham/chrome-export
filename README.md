@@ -9,6 +9,18 @@ Python scripts to convert [Google Chrome]’s bookmarks and history to the [stan
 
 The functionality to do this for bookmarks is already built into Chrome (select Bookmarks&nbsp;→ Bookmarks Manager, then click “Organize” and select “Export Bookmarks…”). I wrote this script to be able to perform this conversion in a cron script.
 
+## Installation
+
+If you have [Homebrew] installed, you can install these scripts with
+
+    brew install chrome-export
+
+[Homebrew]: https://brew.sh
+
+Otherwise, download the .zip or .tar.gz file for the [latest release], extract it, and move the `export-chrome-bookmarks` and/or `export-chrome-history` files to somewhere on your PATH.
+
+[latest release]: https://github.com/bdesham/chrome-export/releases/latest
+
 ## Usage
 
 These scripts require Python, either version 2.7.x or else version 3.2 or later. They should work on Linux, macOS, and Windows.

@@ -39,6 +39,8 @@ To test changes to the scripts, run the shell script `test/run_tests`. The scrip
 
 ## Version history
 
+* 2.0.1 (2018-02-09)
+    - Fixed an error that occurred when trying to open the default bookmarks file under Python 2.7. (Thanks [Hridoy Sankar Dutta](https://github.com/hridaydutta123)!)
 * 2.0 (2018-02-05)
     - Renamed the project from “py-chrome-bookmarks” to “chrome-export”; renamed “py-chrome-bookmarks.py” to “export-chrome-bookmarks”; and renamed “py-chrome-history.py” to “export-chrome-history”. There were no changes in functionality.
 * 1.2.1 (2017-06-02)

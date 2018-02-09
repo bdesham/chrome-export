@@ -63,4 +63,4 @@ This project is [hosted on GitHub](https://github.com/bdesham/chrome-export). Pl
 
 ## License
 
-Copyright © 2011, 2017 Benjamin D. Esham. This program is released under the ISC license, which you can find in the file LICENSE.md.
+Copyright © 2011, 2017–2018 Benjamin D. Esham. This program is released under the ISC license, which you can find in the file LICENSE.md.

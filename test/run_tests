@@ -1,10 +1,20 @@
 #!/bin/bash
 
+# Usage: bash run_tests [install_dir]
+#
+# This script tests export-chrome-bookmarks and export-chrome-history. The
+# optional install_dir parameter specifies the directory in which these two
+# scripts should be found; the default value is the parent directory of this
+# test script. If a relative path is given, it will be interpreted relative to
+# the parent directory of this test script.
+
 failed=0
 
 cd "$(cd "$(dirname "$0")"; pwd -P)/.."
 
-./export-chrome-bookmarks test/Bookmarks test/bookmarks_actual_output.html
+bin="${1:-.}"
+
+$bin/export-chrome-bookmarks test/Bookmarks test/bookmarks_actual_output.html
 cmp -s test/bookmarks_expected_output.html test/bookmarks_actual_output.html
 
 if [[ $? -ne 0 ]]; then
@@ -13,7 +23,7 @@ if [[ $? -ne 0 ]]; then
 	failed=1
 fi
 
-./export-chrome-history test/History test/history_actual_output.html
+$bin/export-chrome-history test/History test/history_actual_output.html
 cmp -s test/history_expected_output.html test/history_actual_output.html
 
 if [[ $? -ne 0 ]]; then

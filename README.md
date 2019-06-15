@@ -47,7 +47,7 @@ The script will ignore history entries with empty titles.
 
 ## Notes for developers
 
-To test changes to the scripts, run the shell script `test/run_tests`. The script runs the bookmarks and history scripts and verifies that their output is identical to what is expected.
+To test changes to the scripts, run `bash test/run_tests`. This script runs both programs and verifies that their output is identical to what is expected. If you have already installed the programs somewhere and want to test those copies, run `bash test/run_tests /path/to/bin`, where `/path/to/bin` is the directory where export-chrome-bookmarks and export-chrome-history are located.
 
 ## Version history
 

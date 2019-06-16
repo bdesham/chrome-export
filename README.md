@@ -17,7 +17,7 @@ If you have [Homebrew] installed, you can install these scripts with
 
 [Homebrew]: https://brew.sh
 
-Otherwise, download the .zip or .tar.gz file for the [latest release], extract it, and move the `export-chrome-bookmarks` and/or `export-chrome-history` files to somewhere on your PATH.
+Otherwise, download the .zip or .tar.gz file for the [latest release], extract it, and move the `export-chrome-bookmarks` and/or `export-chrome-history` files to somewhere on your PATH. You may also want to move `export-chrome-bookmarks.1` and `export-chrome-history.1` from the `man_pages` directory to somewhere on your MANPATH (e.g. `/usr/local/share/man/man1`).
 
 [latest release]: https://github.com/bdesham/chrome-export/releases/latest
 
@@ -48,6 +48,8 @@ The script will ignore history entries with empty titles.
 ## Notes for developers
 
 To test changes to the scripts, run `bash test/run_tests`. This script runs both programs and verifies that their output is identical to what is expected. If you have already installed the programs somewhere and want to test those copies, run `bash test/run_tests /path/to/bin`, where `/path/to/bin` is the directory where export-chrome-bookmarks and export-chrome-history are located.
+
+The man pages are written in Markdown; run `make man` to use Pandoc to convert them into the man format. The generated versions are checked into Git so that users don’t have to install Pandoc.
 
 ## Version history
 

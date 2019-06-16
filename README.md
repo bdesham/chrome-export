@@ -53,6 +53,8 @@ The man pages are written in Markdown; run `make man` to use Pandoc to convert t
 
 ## Version history
 
+* 2.0.2 (2019-06-15)
+    - Added man pages and made the testing script more flexible. No changes to functionality.
 * 2.0.1 (2018-02-09)
     - Fixed an error that occurred when trying to open the default bookmarks file under Python 2.7. (Thanks [Hridoy Sankar Dutta](https://github.com/hridaydutta123)!)
 * 2.0 (2018-02-05)

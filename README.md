@@ -11,13 +11,29 @@ The functionality to do this for bookmarks is already built into Chrome (select 
 
 ## Installation
 
+### Homebrew
+
 If you have [Homebrew] installed, you can install these scripts with
 
     brew install chrome-export
 
 [Homebrew]: https://brew.sh
 
-Otherwise, download the .zip or .tar.gz file for the [latest release], extract it, and move the `export-chrome-bookmarks` and/or `export-chrome-history` files to somewhere on your PATH. You may also want to move `export-chrome-bookmarks.1` and `export-chrome-history.1` from the `man_pages` directory to somewhere on your MANPATH (e.g. `/usr/local/share/man/man1`).
+### Nix
+
+If you’re using the [Nix] package manager, run
+
+    nix-env -i -A nixpkgs.chrome-export
+
+If you use NixOS, run
+
+    nix-env -i -A nixos.chrome-export
+
+[Nix]: https://nixos.org/nix/
+
+### Manual installation
+
+Download the .zip or .tar.gz file for the [latest release], extract it, and move the `export-chrome-bookmarks` and/or `export-chrome-history` files to somewhere on your PATH. You may also want to move `export-chrome-bookmarks.1` and `export-chrome-history.1` from the `man_pages` directory to somewhere on your MANPATH (e.g. `/usr/local/share/man/man1`).
 
 [latest release]: https://github.com/bdesham/chrome-export/releases/latest
 

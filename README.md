@@ -1,4 +1,4 @@
-# chrome-export [![Build Status](https://travis-ci.org/bdesham/chrome-export.svg?branch=master)](https://travis-ci.org/bdesham/chrome-export)
+# chrome-export [![Build Status](https://travis-ci.org/bdesham/chrome-export.svg?branch=main)](https://travis-ci.org/bdesham/chrome-export)
 
 *Formerly called py-chrome-bookmarks*
 

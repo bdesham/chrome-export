@@ -36,4 +36,4 @@ This script is part of the chrome-export project, which is hosted at <https://gi
 
 # LICENSE
 
-Copyright © 2011, 2017–2018 Benjamin D.\ Esham. This program is released under the ISC license, which you can find at <https://github.com/bdesham/chrome-export/blob/master/LICENSE.md>.
+Copyright © 2011, 2017–2018 Benjamin D.\ Esham. This program is released under the ISC license, which you can find at <https://github.com/bdesham/chrome-export/blob/main/LICENSE.md>.

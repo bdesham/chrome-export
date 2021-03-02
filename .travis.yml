@@ -19,7 +19,5 @@ matrix:
       dist: focal
     - python: "3.9"
       dist: focal
-    - python: "3.10"
-      dist: groovy
 install: ""
 script: test/run_tests

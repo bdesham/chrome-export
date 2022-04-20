@@ -1,0 +1,55 @@
+name: Test
+on:
+  - push
+  - pull_request
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - ubuntu-latest
+          - ubuntu-18.04
+          - macos-latest
+          - macos-10.15
+        python-version:
+          - "2.7"
+          - "3.3"
+          - "3.4"
+          - "3.5"
+          - "3.6"
+          - "3.7"
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11.0-alpha.7"
+        exclude:
+          - python-version: "2.7"
+            os: ubuntu-latest
+          - python-version: "3.3"
+            os: macos-latest
+          - python-version: "3.3"
+            os: macos-10.15
+          - python-version: "3.3"
+            os: ubuntu-latest
+          - python-version: "3.4"
+            os: ubuntu-latest
+          - python-version: "3.4"
+            os: macos-latest
+          - python-version: "3.4"
+            os: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Confirm the Python version
+        run: python --version
+
+      - name: Run the test script
+        run: test/run_tests

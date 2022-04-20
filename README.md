@@ -1,4 +1,4 @@
-# chrome-export [![Build Status](https://travis-ci.org/bdesham/chrome-export.svg?branch=main)](https://travis-ci.org/bdesham/chrome-export)
+# chrome-export [![Build status](https://github.com/bdesham/chrome-export/actions/workflows/main.yaml/badge.svg)](https://github.com/bdesham/chrome-export/actions/workflows/main.yaml)
 
 *Formerly called py-chrome-bookmarks*
 

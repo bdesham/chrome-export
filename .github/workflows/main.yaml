@@ -4,7 +4,7 @@ on:
   - pull_request
 jobs:
   test:
-    name: Test with Python ${{ matrix.python-version }}, ${{ matrix.os }}
+    name: Python ${{ matrix.python-version }} (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -26,6 +26,8 @@ jobs:
           - python-version: "3.9"
             os: ubuntu-latest
           - python-version: "3.10"
+            os: ubuntu-latest
+          - python-version: "3.11.0-alpha.7"
             os: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

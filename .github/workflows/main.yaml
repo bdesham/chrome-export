@@ -1,0 +1,24 @@
+name: Test
+on:
+  - push
+  - pull_request
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - "2.7"
+          - "3.2"
+          - "3.3"
+          - "3.4"
+          - "3.5"
+          - "3.6"
+          - "3.7"
+          - "3.8"
+          - "3.9"
+          - "3.10"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run the test script
+        run: test/run_tests

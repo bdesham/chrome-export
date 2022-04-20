@@ -20,7 +20,14 @@ jobs:
           - "3.10"
     steps:
       - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Confirm the Python version
         run: python --version
+
       - name: Run the test script
         run: test/run_tests

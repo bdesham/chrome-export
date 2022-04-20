@@ -4,20 +4,28 @@ on:
   - pull_request
 jobs:
   run_tests:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version:
-          - "2.7"
-          - "3.2"
-          - "3.3"
-          - "3.4"
-          - "3.5"
-          - "3.6"
-          - "3.7"
-          - "3.8"
-          - "3.9"
-          - "3.10"
+        include:
+          - python-version: "2.7"
+            os: ubuntu-18.04
+          - python-version: "3.3"
+            os: ubuntu-18.04
+          - python-version: "3.4"
+            os: ubuntu-18.04
+          - python-version: "3.5"
+            os: ubuntu-latest
+          - python-version: "3.6"
+            os: ubuntu-latest
+          - python-version: "3.7"
+            os: ubuntu-latest
+          - python-version: "3.8"
+            os: ubuntu-latest
+          - python-version: "3.9"
+            os: ubuntu-latest
+          - python-version: "3.10"
+            os: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 

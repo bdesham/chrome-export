@@ -20,5 +20,7 @@ jobs:
           - "3.10"
     steps:
       - uses: actions/checkout@v2
+      - name: Confirm the Python version
+        run: python --version
       - name: Run the test script
         run: test/run_tests
